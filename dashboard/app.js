@@ -208,6 +208,25 @@
     });
   }
 
+  // Deep links: ?select=<slug> opens a protocol, ?cat= ?chain= ?tier= ?sort= ?q=
+  // pre-set the board's filters, ?view=live|method opens another tab. The page
+  // is static, so a link can carry the exact view it means to show.
+  var params = new URLSearchParams(location.search);
+  if (params.get('q')) el('q').value = params.get('q');
+  if (params.get('cat')) el('f-cat').value = params.get('cat');
+  if (params.get('chain')) el('f-chain').value = params.get('chain');
+  if (params.get('tier')) el('f-tier').value = params.get('tier');
+  if (params.get('sort')) el('f-sort').value = params.get('sort');
+  var wantView = params.get('view');
+  if (wantView && wantView !== 'board') {
+    for (var b = 0; b < tabBtns.length; b++) {
+      var on = tabBtns[b].getAttribute('data-view') === wantView;
+      tabBtns[b].classList.toggle('active', on);
+      el('view-' + tabBtns[b].getAttribute('data-view')).classList.toggle('hidden', !on);
+    }
+  }
+  if (params.get('select')) selected = params.get('select');
+
   renderBoard();
   renderDetail();
 })();
