@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — pre-token protocols, priced by their peers</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">◉</div>
+    <div>
+      <h1>Token Launch Radar</h1>
+      <p class="tagline">Pre-token protocols, priced against the live tokens in their own category.</p>
+    </div>
+  </div>
+  <div class="stamp" id="stamp"></div>
+</header>
+
+<section class="stats" id="stats"></section>
+
+<nav class="tabs" id="tabs">
+  <button data-view="board" class="active">Radar board</button>
+  <button data-view="live">Already trading</button>
+  <button data-view="method">How the radar prices</button>
+</nav>
+
+<main>
+  <section id="view-board">
+    <div class="controls">
+      <input id="q" type="search" placeholder="Search a protocol or category…">
+      <select id="f-cat"><option value="">All categories</option></select>
+      <select id="f-chain"><option value="">All chains</option></select>
+      <select id="f-tier">
+        <option value="">Watchlist + early</option>
+        <option value="watchlist">Watchlist only</option>
+        <option value="early">Early finds only</option>
+      </select>
+      <select id="f-sort">
+        <option value="implied">Sort: implied value</option>
+        <option value="tvl">Sort: TVL</option>
+        <option value="growth">Sort: 7d change</option>
+        <option value="age">Sort: age</option>
+        <option value="multiple">Sort: peer multiple</option>
+      </select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="board-wrap">
+      <table class="board">
+        <thead><tr>
+          <th class="num">#</th><th>Protocol</th><th>Chains</th>
+          <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+          <th class="num">Peer ×</th><th class="num">Implied value</th><th></th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <aside class="detail" id="detail"></aside>
+    </div>
+    <section class="watchonly" id="watchonly"></section>
+  </section>
+
+  <section id="view-live" class="hidden">
+    <p class="lede">These protocols already trade, so the radar does not rank them: it shows the
+    market's own value beside the TVL that value rests on. Their category medians are the
+    yardstick the board prices pre-token protocols with.</p>
+    <table class="board">
+      <thead><tr><th>Protocol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">Cap / TVL</th><th class="num">7d</th></tr></thead>
+      <tbody id="live-rows"></tbody>
+    </table>
+  </section>
+
+  <section id="view-method" class="hidden">
+    <div class="method" id="method"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Implied values are this radar's own claim, worked out from the sealed snapshot alone.
+  A protocol here <em>records</em> no token; that is DefiLlama's record, not proof none exists.
+  Nothing on this page is a prediction that a token will launch, or advice to buy anything.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
